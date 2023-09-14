@@ -1,0 +1,48 @@
+---
+let result = [];	
+const url = 'https://graphql.contentful.com/content/v1/spaces/mt0pmhki5db7'
+
+const query = `query{
+  showCollection{
+    items {
+      title
+      firstEpisodeDate
+      lastEpisodeDate
+      henshinMp4 {
+        url
+      }
+    }
+  }
+}`;
+
+
+const options = {
+	method: 'POST',
+	headers: {
+		'content-type': 'application/json',
+		'Authorization': 'Bearer 8c7dbd270cb98e83f9d8d57fb8a2ab7bac9d7501905fb013c69995ebf1b2a719',
+	},
+	body: JSON.stringify({ query }),
+};
+
+try {
+	const response = await fetch(url, options);
+	result = await response.text();
+	console.log('🥮' + result);
+} catch (error) {
+	console.error('💩' + error);
+}
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+	</head>
+	<body>
+		<h1>{result}</h1>
+	</body>
+</html>
